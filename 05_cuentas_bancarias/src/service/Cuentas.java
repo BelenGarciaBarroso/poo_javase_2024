@@ -8,8 +8,7 @@ public class Cuentas {
 		this.saldo = saldo;
 	}
 	public Cuentas() {
-		saldo = 100;
-	}
+		saldo = 100;	}
 	
 	public void extraer (double cantidad) {
 		saldo-=cantidad;

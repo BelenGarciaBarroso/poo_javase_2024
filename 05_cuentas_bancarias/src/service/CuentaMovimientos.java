@@ -16,6 +16,7 @@ public class CuentaMovimientos extends CuentaLimite {
 	@Override
 	public void extraer(double cantidad) {
 		Movimientos m=new Movimientos (cantidad,LocalDateTime.now(), "extracción");
+		movimientos.add(m);
 		super.extraer(cantidad);
 	}
 	@Override

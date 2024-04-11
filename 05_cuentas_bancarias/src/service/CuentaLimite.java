@@ -19,8 +19,10 @@ public class CuentaLimite extends Cuentas {
 	// Extraemos si la cantidad es inferior al límite
 	@Override
 	public void extraer(double cantidad) {
-		if (cantidad<limite) {
+		if (cantidad<=limite) {
 			super.extraer(cantidad);
+		}else {
+			System.out.println("La cantidad a extraer supera el límite");
 		}
 	}
 	
