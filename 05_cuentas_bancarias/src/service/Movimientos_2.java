@@ -2,17 +2,17 @@ package service;
 
 import java.time.LocalDateTime;
 
-public class Movimientos {
+public class Movimientos_2 {
 	private double cantidad;
 	private LocalDateTime fecha;
 	private String tipo;
-	public Movimientos(double cantidad, LocalDateTime fecha, String tipo) {
+	public Movimientos_2(double cantidad, LocalDateTime fecha, String tipo) {
 		super();
 		this.cantidad = cantidad;
 		this.fecha = fecha;
 		this.tipo = tipo;
 	}
-	public Movimientos() {
+	public Movimientos_2() {
 		super();
 	}
 	public double getCantidad() {
