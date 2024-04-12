@@ -1,4 +1,4 @@
-package pruebas;
+package principal;
 class M1{
 	int a;
 	static int b=1;
@@ -15,7 +15,7 @@ class M2 extends M1{
 		b++;
 	}
 }
-public class Test2 {
+public class Test_1 {
 	public static void main(String[] args) {
 		M1 m1=new M1();
 		M2 m2=new M2();
