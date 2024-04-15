@@ -1,6 +1,6 @@
 package service;
 
-public class Triangulo extends Figura {
+public class Triangulo extends Figura implements Operaciones{
 	private double base;
 	private double altura;
 	
@@ -39,5 +39,21 @@ public class Triangulo extends Figura {
 		
 		return base*altura/2;
 	}
+
+	@Override
+	public void girar(double grados) {
+		base=+grados;
+		altura=+grados;
+		
+	}
+
+	@Override
+	public double invertir() {
+		base--;
+		return base+altura;
+	}
+
+	
+	
 
 }
