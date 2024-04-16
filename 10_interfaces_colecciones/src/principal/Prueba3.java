@@ -17,6 +17,8 @@ public class Prueba3 {
 		nums2.add(11);nums2.add(71);nums2.add(12);
 		nums2.add(31);nums.add(6);nums2.add(30);nums.add(8);
 		System.out.println(conjunto (nums,nums2));
+		
+		//
 
 	}
 	
