@@ -4,6 +4,7 @@ package principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Prueba3 {
@@ -17,6 +18,10 @@ public class Prueba3 {
 		nums2.add(11);nums2.add(71);nums2.add(12);
 		nums2.add(31);nums.add(6);nums2.add(30);nums.add(8);
 		System.out.println(conjunto (nums,nums2));
+		
+		List<Integer> nums3=List.of(3,5,100,-5); // método estático con list (of) para crear una lista con los valores asignados.
+		// es una lista inmutable (fija)
+		
 		
 		//
 
