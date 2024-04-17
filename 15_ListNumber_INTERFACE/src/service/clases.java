@@ -23,7 +23,7 @@ class Pares implements Condicion {
 }
 
 
-public class AppNumeros {
+public class clases {
 
 	public static void main(String[] args) {
 		List <Integer>numeros=List.of(3,-2,8,5,1,17,22,-9,6,12);
