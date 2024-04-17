@@ -34,7 +34,7 @@ public class Test {
 		lst.add(2);
 		lst.add(7);
 		// Elimina los impares
-		lst.eliminarNurmeros(n-> n%2!=0);
+		lst.eliminarNurmeros(n-> n%2!=0); // con expresión lambda
 		System.out.println(lst);
 		// Hacer raiz cuadrada 
 		lst.convertirNumero(n-> (int)Math.sqrt(n));
