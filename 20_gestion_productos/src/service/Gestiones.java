@@ -53,5 +53,8 @@ public class Gestiones extends Producto {
 		
 	}
 	
+	public void ordenarPorPrecio (Producto producto) {
+		produc.sort((a,b)->(Double.compare(a.getPrecio(), b.getPrecio())));
+	}
 
 }

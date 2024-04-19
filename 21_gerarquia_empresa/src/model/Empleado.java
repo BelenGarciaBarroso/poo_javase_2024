@@ -8,7 +8,7 @@ public abstract class Empleado {
 	private int edad;
 	private LocalDate fechaIngreso;
 	private double salario;
-	final double bono=500;
+	final double BONO=500;
 	public Empleado(String nombre, int edad, LocalDate fechaIngreso, double salario) {
 		super();
 		this.nombre = nombre;

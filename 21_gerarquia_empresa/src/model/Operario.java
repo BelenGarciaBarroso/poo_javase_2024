@@ -5,16 +5,15 @@ import java.time.Period;
 
 public class Operario extends Empleado {
 	private int nivel;
+	
 
 	@Override
 	public void incentivar() {
-		Period p=Period.between(this.getFechaIngreso(), LocalDate.now());
-
-		if (p.getYears()>30 && nivel>2 ) {
-			this.setSalario(this.getSalario()+(2*bono));
+		if (this.getEdad()>30 && nivel>2 ) {
+			this.setSalario(this.getSalario()+(2*BONO));
 		}else {
-			if ((p.getYears()>30 || nivel>2 )) {
-				this.setSalario(this.getSalario()+(bono));
+			if ((this.getEdad()>30 || nivel>2 )) {
+				this.setSalario(this.getSalario()+(BONO));
 			}
 		}
 	}
