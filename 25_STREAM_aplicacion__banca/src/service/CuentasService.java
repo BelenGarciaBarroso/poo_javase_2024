@@ -2,7 +2,11 @@ package service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import model.Cuenta;
 
@@ -31,8 +35,69 @@ public class CuentasService {
 	public int cuentasPorDivisa (String divisa) {
 		return (int) cuentas.stream()
 				.filter(n->n.getDivisa().equals(divisa))
-				.count();
-						
+				.count();				
 	}
+	
+	// Método que a partir de una fecha, nos indique cuántas
+	// cuentas se crearon a partir de dicha fecha
+	public int contarCuentasDespuesFecha (LocalDate fecha) {
+		return (int) cuentas.stream()
+				. filter(c->c.getFechaApertura().isAfter(fecha))
+				.count();
+	}
+	
+	// Método que devuelva la cuenta asociada a un determinado número
+	public Cuenta buscarCuenta (String numero) {
+		return cuentas.stream()
+				.filter (c->c.getNumCuenta().equals(numero)) // Stream<Cuenta>
+				.findFirst() // Optiona<Integer>
+				.orElse(null);
+	}
+	
+	// Método que devuelva la cuenta asociada a un determinado titular
+	public Optional <Cuenta> buscarCuentaPorTitular (String titular) {
+		return cuentas.stream()
+				.filter (c->c.getNumCuenta().equals(titular)) // Stream<Cuenta>
+				.findFirst(); // Optional<Integer>
+	}
+		
+	// Método que devuelva la cuenta con menor saldo
+	public Cuenta cuentaMenorSaldo () {
+		/*return cuentas.stream() // Aquí la ordena y saca el primero, que es el menor
+				.sorted((a,b)->Double.compare(a.getSaldo(), b.getSaldo()))
+				.findFirst()// Optional<Cuenta>
+				.orElse(null);*/
+		/*return cuentas.stream()// Aquí copara los saldos y saca el menor
+				.min((a,b)->Double.compare(a.getSaldo(), b.getSaldo()))
+				.orElse(null);*/
+		return cuentas.stream() // Aquí compara los saldo con una función double
+				.min(Comparator.comparingDouble(c->c.getSaldo()))
+				.orElse(null);		
+	}
+	
+	// método que a partir de nombre de divisa, devuelva las cuentas que hay de dicha divisa
+	public List<Cuenta> listaCuentasPorDivisa (String divisa) {
+		return cuentas.stream()
+				.filter(n->n.getDivisa().equalsIgnoreCase(divisa))
+				//.collect(Collectors.toList() -- Es igual a lo de abajo
+				.toList();		
+	}
+	
+	// Método que devuelva un MaP con los números de cuentas como 
+	// claves y saldo como valor.
+	
+	public Map<String,Double> MapCuenta () {
+		return cuentas.stream()
+				.collect(Collectors.toMap(c->c.getNumCuenta(), c->c.getSaldo()));
+		
+	}
+	
+	// Método que devuelve una tabla agrupada por divisa:
+	public Map<String,List<Cuentas>> cuentasPorDivisa() {
+		return cuentas.stream()
+				.collect(Collectors.groupingBy(c->c.getDivisa()));
+
+	}
+		
 	
 }
