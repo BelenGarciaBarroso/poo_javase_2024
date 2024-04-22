@@ -1,13 +1,9 @@
 package service;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.junit.runner.JUnitCommandLineParseResult.CommandLineParserError;
 
 import model.Pedido;
 
@@ -30,8 +26,10 @@ public class PedidosService {
 			}
 		}
 		return pAux;*/
-		return (pedidos.stream()
-				.max(Comparator.comparing(p-
+		return pedidos.stream()//Stream<Pedido>
+				//.max(Comparator.comparing(p->p.getFechaPedido()))
+				.max((a,b)->a.getFechaPedido().compareTo(b.getFechaPedido()))
+				.orElse(null);
 		
 	}
 	
@@ -50,27 +48,32 @@ public class PedidosService {
 	}
 	
 	public Pedido pedidoCercano(LocalDate f1) {
-		/*Pedido aux=new Pedido();
-		long dias=0; 
-		long dias2=0;
-		for(Pedido p:pedidos) {
-			if (aux.getFechaPedido() == null) {
-				aux=p;
-				dias = Math.abs(ChronoUnit.DAYS.between(aux.getFechaPedido(), f1));
-				/*if (dias<0) {
-					dias=dias * -1;
-				}*/
-			}else {
-				dias2 = Math.abs(ChronoUnit.DAYS.between(p.getFechaPedido(), f1));
-				/*if (dias2<0) {
-					dias2=dias2 * -1;
-				}*/
-				if (dias2<dias) {
-					aux=p;
-					dias=dias2;
-				}
-			}
-		}
-		return aux;*/
+//		Pedido aux=new Pedido();
+//		long dias=0; 
+//		long dias2=0;
+//		for(Pedido p:pedidos) {
+//			if (aux.getFechaPedido() == null) {
+//				aux=p;
+//				dias = Math.abs(ChronoUnit.DAYS.between(aux.getFechaPedido(), f1));
+//				/*if (dias<0) {
+//					dias=dias * -1;
+//				}*/
+//			}else {
+//				dias2 = Math.abs(ChronoUnit.DAYS.between(p.getFechaPedido(), f1));
+//				/*if (dias2<0) {
+//					dias2=dias2 * -1;
+//				}*/
+//				if (dias2<dias) {
+//					aux=p;
+//					dias=dias2;
+//				}
+//			}
+//		}
+//		return aux;*/
+		
+		return pedidos.stream()
+				.min((a, b) -> Math.abs(a.getFechaPedido().compareTo(f1)) - Math.abs(b.getFechaPedido().compareTo(f1)))
+                .orElse(null);
+				
 	}
 }

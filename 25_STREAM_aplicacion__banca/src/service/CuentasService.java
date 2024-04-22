@@ -78,7 +78,7 @@ public class CuentasService {
 	// método que a partir de nombre de divisa, devuelva las cuentas que hay de dicha divisa
 	public List<Cuenta> listaCuentasPorDivisa (String divisa) {
 		return cuentas.stream()
-				.filter(n->n.getDivisa().equalsIgnoreCase(divisa))
+				.filter(n->n.getDivisa().equalsIgnoreCase(divisa))// Stream<String>
 				//.collect(Collectors.toList() -- Es igual a lo de abajo
 				.toList();		
 	}
@@ -93,7 +93,7 @@ public class CuentasService {
 	}
 	
 	// Método que devuelve una tabla agrupada por divisa:
-	public Map<String,List<Cuentas>> cuentasPorDivisa() {
+	public Map<String,List<Cuenta>> cuentasPorDivisa() {
 		return cuentas.stream()
 				.collect(Collectors.groupingBy(c->c.getDivisa()));
 
