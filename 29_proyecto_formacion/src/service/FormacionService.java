@@ -86,20 +86,18 @@ public class FormacionService {
 		return cursos.stream()
 				.filter(n->ChronoUnit.MONTHS.between(n.getFechaInicio(), n.getFechaFin()) < meses)
 				.collect(Collectors.toList());
-		
-				
 	}
 	 
 	 
 	//Tabla de cursos, donde la clave sea la duración del curso(en meses) y el valor el nombre del curso
-	
+	to Map
 	
 	//Tabla de cursos, donde la clave sea la duración del curso(en meses) y el valor la lista de cursos con dicha duración
 	 
 	 
 	//tabla con los cursos divididos entre caros y baratos. Caros, los que superen el precio recibido como parámetro
 	//baratos los que no lo superen o lo igualen
-	
+	partition join
 	 
 	//cadena con los nombres de todos los cursos, separados por una coma
 	 
@@ -113,6 +111,7 @@ public class FormacionService {
 	//lista de alumnos matriculados en cursos de determinada temática
 	 
 	
-	//alumno con mayor nota 
+	//alumno con mayor nota  --> flatMap
+	
 
 }
