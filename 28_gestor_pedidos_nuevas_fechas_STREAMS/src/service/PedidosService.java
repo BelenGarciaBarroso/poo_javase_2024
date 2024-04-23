@@ -104,7 +104,8 @@ public class PedidosService {
 		
 		// Devuelve una cadena con los nombres de todos los productos sin duplicar.
 		// separados con un guion -
-		publid String nombresProductos () {
+		
+		public String nombresProductos () {
 			return pedidos.stream()
 					.map(p->p.getProducto()) // Stream <String>
 					.distinct()

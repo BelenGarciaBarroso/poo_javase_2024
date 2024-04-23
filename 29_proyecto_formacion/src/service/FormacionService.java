@@ -3,7 +3,10 @@ package service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,14 +32,14 @@ public class FormacionService {
 			)); 
 	
 	//añade un nuevo curso si no coinciden mismo nombre y fecha de inicio
-	public boolean agregarCurso (Curso curso) {
-		if (cursos.stream()
-			.noneMatch(a->a.getNombre().equals(curso.getNombre())&&a.getFechaInicio().equals(curso.getFechaInicio()))) {
-				return false;
-			}
-		cursos.add(curso);
-				
-	}
+//	public boolean agregarCurso (Curso curso) {
+//		if (cursos.stream()
+//			.noneMatch(a->a.getNombre().equals(curso.getNombre())&&a.getFechaInicio().equals(curso.getFechaInicio()))) {
+//				return false;
+//			}
+//		cursos.add(curso);
+//				
+//	}
 
 
 	//precio medio de cursos por temática
@@ -90,28 +93,79 @@ public class FormacionService {
 	 
 	 
 	//Tabla de cursos, donde la clave sea la duración del curso(en meses) y el valor el nombre del curso
-	to Map
+	public Map<Integer,String> tablaCursos() {
+		return cursos.stream()
+				.collect(Collectors.toMap((n->(int)ChronoUnit.MONTHS.between(n.getFechaInicio(), n.getFechaFin())), n->n.getNombre()));
+	}
 	
 	//Tabla de cursos, donde la clave sea la duración del curso(en meses) y el valor la lista de cursos con dicha duración
+	public Map<Integer,String> tablaCursos2() {
+		return cursos.stream()
+				.collect(Collectors.toMap((n->(int)ChronoUnit.MONTHS.between(n.getFechaInicio(), n.getFechaFin())), 
+						n->n.getCurso()
+	
 	 
 	 
 	//tabla con los cursos divididos entre caros y baratos. Caros, los que superen el precio recibido como parámetro
 	//baratos los que no lo superen o lo igualen
-	partition join
+	public Map<Boolean,List<Curso>> cursosCarosBaratos (int precio) {
+		return cursos.stream()
+			.collect(Collectors.groupingBy(n->n.getPrecio()<=(precio)));
+	}
+
 	 
 	//cadena con los nombres de todos los cursos, separados por una coma
-	 
+	public String nombresCursos() {
+		return cursos.stream()
+				.map(n->n.getNombre())
+				.distinct()
+				.collect(Collectors.joining(","));
+	}
 	 
 	// nota media de un curso
+	public double mediaCurso() {
+		return cursos.stream()
+				.flatMap(n->n.getAlumno().stream().map(s->s.getNota()))
+				.collect(Collectors.averagingDouble(n->n));			
+	}
 	 
-	
 	//lista con los nombres de todos los alumnos
-	 
-	 
+	public List<String> nombresAlumnos() {
+		return cursos.stream()
+				.flatMap(n->n.getAlumno().stream().map(s->s.getNombre()))
+				.toList();
+	}
+	  
 	//lista de alumnos matriculados en cursos de determinada temática
+	
 	 
 	
-	//alumno con mayor nota  --> flatMap
+	//alumno con mayor nota
+	public double alumnoNotaMayor() {
+		return cursos.stream()
+				.flatMap(n->n.getAlumno().stream().map(s->s.getNota()))
+				.mapToDouble(n->n)
+				.max()
+				.orElse(0);
+	}
 	
+	
+	public static void main(String[] args) {
+		Map<Integer,String> cursosLista=new HashMap<>();
+		//cursosLista=tablaCursos();
+		Set<Integer> claves =cursosLista.keySet();
+		for (Integer n:claves) {
+			System.out.println(n);
+		}
+		Collection<String> valores=cursosLista.values();
+		for (String n:valores) {
+			System.out.println(n);
+		}
+		
+			
+		
+
+	}
+	 
 
 }
