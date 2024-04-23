@@ -1,11 +1,8 @@
 package view;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -68,11 +65,12 @@ public class PedidosMenu {
 		service.nuevoPedido(p);
 	}
 	static void mostrarReciente() {
-		Pedido p=service.pedidoMasReciente();
-		DateTimeFormatter sdf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		System.out.print("Producto: "+p.getProducto()+" ");
-		System.out.print("Unidades: "+p.getUnidades()+" ");
-		System.out.println("Fecha pedido: "+p.getFechaPedido().format(sdf)+" ");
+		service.pedidoMasReciente().ifPresentOrElse(p-> {
+			DateTimeFormatter sdf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			System.out.print("Producto: "+p.getProducto()+" ");
+			System.out.print("Unidades: "+p.getUnidades()+" ");
+			System.out.println("Fecha pedido: "+p.getFechaPedido().format(sdf)+" ");
+		}, ()->System.out.println("No hay pedidos"));
 	}
 	static void pedidosEntreFechas() {
 		Scanner sc=new Scanner(System.in);
